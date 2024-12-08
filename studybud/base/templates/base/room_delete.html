@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <h6>Are you sure you want to delete the Room {{room.name}}, This cannot be undone  </h6>
+
+    <h6><a href="{{request.META.HTTP_REFERER}}">Go Back</a></h6>
+    <input type="submit" value="Confirm" class='btn btn-danger'>
+</form>
+
+
+{% endblock content %}
