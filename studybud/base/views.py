@@ -1,12 +1,12 @@
 from django.shortcuts import render,get_object_or_404,redirect,Http404
 from .models import Room
-from .forms import RoomForm
+from .forms import RoomForm, MessageForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse 
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
@@ -14,18 +14,33 @@ rooms = Room.objects.all()
 
 def home(request):
     context = None
-    
+
     context = {'rooms':rooms}
     return render(request, 'base/index.html', context)
 
 def room(request, id):
     context = None
     room = get_object_or_404(Room, pk=id)
-    context = {'rooms':rooms , 'room':room}
+    form = MessageForm()
+    context = {'rooms':rooms , 'room':room, 'form':form}
+ 
+    if request.method == "POST":
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.user = request.user
+            message.room = room
+
+            message.save()
+            print('LOG:  MessageForm submitted!')
+
+        else:
+            print('LOG: MessageForm could not be submitted')
+
     return render(request, 'base/room.html', context)
 
 
-#User crud operations 
+#User crud operations
 
 
 
@@ -42,17 +57,17 @@ def create_room(request):
         else:
             return Http404('ERROR SUBMITTING FORM , FORM INVALID!!!')
 
-    else: 
+    else:
         form = RoomForm()
         context = {'form': form}
         return render(request, 'base/room_form.html', context)
 
 @login_required(login_url='login')
 def update_room(request, id):
-    
+
     room = get_object_or_404(Room, pk=id)
     form = RoomForm(instance=room)
-    
+
     if request.user != room.host:
         return HttpResponse('The user does not have sufficient permissions to view the page')
 
@@ -66,7 +81,6 @@ def update_room(request, id):
 
     return render (request, 'base/room_form.html', context)
 
-@login_required(login_url='login')
 def delete_room(request, id):
     form = get_object_or_404(Room, pk=id)
     if request.method == 'POST':
@@ -91,7 +105,7 @@ def loginView(request):
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
 
-        try: 
+        try:
             user = User.objects.get(username=username)
 
         except:
@@ -138,18 +152,13 @@ def registerPage(request):
     return render(request, 'base/login_register.html', context)
 
 
-# Messages Crud operaton 
+# Messages Crud operaton
 
+def create_message(request):
+    context = None
 
+    if request.method == 'POST':
+        print(f'LOG:  {request.POST}')
+        #form = MessageForm(request.POST)
 
-
-
-
-
-
-
-
-
-
-
-
+    return render(request, 'base/create_message.html', context)
