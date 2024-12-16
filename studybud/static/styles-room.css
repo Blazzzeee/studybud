@@ -14,7 +14,7 @@
     grid-area: 2/3/-1/-1;
     display: flex;
     flex-direction: column-reverse;
-    gap: 50px;
+    gap: 1%;
 }
 
 .message-box-container {
@@ -26,7 +26,6 @@
     /* max-width: ; */
     margin: auto; /* Center the container */
     gap: 10px;
-    order: -1;
     justify-self: flex-end;
 }
 .message-input {
@@ -70,4 +69,10 @@
 a {
     text-decoration: none !important;
     color: white;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
