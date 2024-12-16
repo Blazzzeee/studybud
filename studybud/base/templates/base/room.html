@@ -123,17 +123,12 @@
         </div>
     </form>
 
-    <div class="message-self mx-4 rounded px-5 py-2">
-        message-self Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Delectus, cupiditate maiores et nostrum perspiciatis tenetur reiciendis
-        dolore natus velit dignissimos?
-    </div>
+    {% for message in RoomMessages %} {% if message.user == request.user %}
+    <div class="message-self mx-4 rounded px-5 py-2">{{message}}</div>
 
-    <div class="message-others mx-4 rounded px-5 py-2">
-        message-others Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Quae molestiae sapiente officia quia animi inventore dolore magni,
-        voluptatum itaque ut!
-    </div>
+    {% else %}
+    <div class="message-others mx-4 rounded px-5 py-2">{{message}}</div>
+    {% endif %} {% endfor %}
 </div>
 
 {% endblock content %}

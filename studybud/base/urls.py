@@ -9,7 +9,6 @@ urlpatterns = [
     path('login', views.loginView, name='login'),
     path('logout', views.logoutUser, name='logout'),
     path('register', views.registerPage, name='register'),
-    path('create_message', views.create_message, name='create_message'),
 
 
 ]

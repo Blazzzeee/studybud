@@ -1,10 +1,9 @@
-from django.shortcuts import render,get_object_or_404,redirect,Http404
-from .models import Room
+from django.shortcuts import render,get_object_or_404,redirect,Http404 
+from .models import Room, Message
 from .forms import RoomForm, MessageForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -22,7 +21,8 @@ def room(request, id):
     context = None
     room = get_object_or_404(Room, pk=id)
     form = MessageForm()
-    context = {'rooms':rooms , 'room':room, 'form':form}
+    messages = Message.objects.filter(room= room)
+    context = {'rooms':rooms , 'room':room, 'form':form, 'RoomMessages': messages}
  
     if request.method == "POST":
         form = MessageForm(request.POST)
