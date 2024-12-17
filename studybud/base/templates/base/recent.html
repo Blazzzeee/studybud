@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% for message in RoomMessages %}
+<div class="message-others mx-4 rounded px-5 py-2">{{ message }}</div>
+{% endfor %}
+{% endblock content %}

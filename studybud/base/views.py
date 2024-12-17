@@ -154,11 +154,23 @@ def registerPage(request):
 
 # Messages Crud operaton
 
-def create_message(request):
-    context = None
+def delete_message(request, id):
 
-    if request.method == 'POST':
-        print(f'LOG:  {request.POST}')
-        #form = MessageForm(request.POST)
+    context = {}
 
-    return render(request, 'base/create_message.html', context)
+
+    return render(request, 'base/delete_room.html', context)
+
+
+
+
+#Recent activity page        
+    #All members 
+
+
+def recent_page(request, ):
+    messages = Message.objects.all()
+
+    context = {'RoomMessages': messages}
+    return render(request, 'base/recent.html', context)
+
