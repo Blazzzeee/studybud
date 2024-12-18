@@ -9,7 +9,69 @@
   <title>Layout</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <style>
+  #flash-messages {
+      background-color: #0d0d1a;
+      color: #ffffff;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+  }
 
+  #flash-messages .card {
+      background-color: transparent;
+      border: 2px solid #6785ff;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      margin: 10px;
+      width: 530px;
+      box-shadow: 0 0 15px rgba(103, 133, 255, 0.5);
+  }
+
+  #flash-messages .card h2 {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
+  }
+
+  #flash-messages .card i {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
+  }
+
+  #flash-messages .card p {
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      color: #ffffff;
+  }
+
+  #flash-messages .btn-custom {
+      background-color: transparent;
+      border: 2px solid #6785ff;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
+  }
+
+  #flash-messages .btn-custom:hover {
+      background-color: #6785ff;
+      color: #0d0d1a;
+  }
+
+  @media (min-width: 768px) {
+      #flash-messages .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+      }
+  }
+      </style>
   <link rel="stylesheet" href="{% static 'styles.css' %}" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,6 +79,14 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="{% static 'styles-room.css' %}" />
+
+{% block style %}
+
+{% endblock style %}
+
+
+
+
 </head>
 
 <body data-bs-theme="dark">
@@ -66,9 +136,21 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-        {{ message }}
-    </li>
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+
+
+
+        <div class="container-lg " id='flash-message' style="z-index : 2; ">
+            <div class="card px-3">
+                <h2>Error Fatal</h2>
+                <i class="fas fa-check"></i>
+                <p>
+                   {{ message }}
+                </p>
+                <button class="btn btn-custom">Continue</button>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 </ul>
 {% endif %}
@@ -97,6 +179,21 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
     <script src="{% static 'search.js' %}"></script>
+
+    <script>
+
+    let message = document.getElementById('flash-message');
+    // console.log(message);
+
+    let button=message.getElementsByClassName('btn-custom')[0];
+    // console.log(button)
+
+
+    button.addEventListener("click", function(){
+      	message.style.display = "none" ;
+      console.log("Display message set to hidden!!")
+    })
+    </script>
 </body>
 
 </html>

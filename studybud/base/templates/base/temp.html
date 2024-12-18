@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+    {% block style %}
+<style>
+    body {
+        background-color: #0d0d1a;
+        color: #ffffff;
+        /* font-family: "Arial", sans-serif;
+     display: flex; */
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .card {
+        background-color: transparent;
+        border: 2px solid #6785ff;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        margin: 10px;
+        width: 530px;
+        box-shadow: 0 0 15px rgba(103, 133, 255, 0.5);
+    }
+    .card h2 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
+    }
+    .card i {
+        font-size: 2.5em;
+        margin-bottom: 15px;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
+    }
+    .card p {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+    .btn-custom {
+        background-color: transparent;
+        border: 2px solid #6785ff;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
+    }
+    .btn-custom:hover {
+        background-color: #6785ff;
+        color: #0d0d1a;
+    }
+    @media (min-width: 768px) {
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+    }
+
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<div class="container-lg " id='flash-message' style="z-index : 2; ">
+    <div class="card px-3">
+        <h2>Success!</h2>
+        <i class="fas fa-check"></i>
+        <p>
+            The procedure is complete now.<br />You can continue to use the
+            site.
+        </p>
+        <button class="btn btn-custom">Continue</button>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+    {% block js %}
+
+let message = document.getElementById('flash-message');
+// console.log(message);
+
+let button=message.getElementsByClassName('btn-custom')[0];
+// console.log(button)
+
+
+button.addEventListener("click", function(){
+  	message.style.display = "none" ;
+  console.log("Display message set to hidden!!")
+})
+        {% endblock js %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect,Http404 
+from django.shortcuts import render,get_object_or_404,redirect,Http404
 from .models import Room, Message
 from .forms import RoomForm, MessageForm
 from django.contrib.auth.models import User
@@ -23,7 +23,7 @@ def room(request, id):
     form = MessageForm()
     messages = Message.objects.filter(room= room)
     context = {'rooms':rooms , 'room':room, 'form':form, 'RoomMessages': messages}
- 
+
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -164,8 +164,8 @@ def delete_message(request, id):
 
 
 
-#Recent activity page        
-    #All members 
+#Recent activity page
+    #All members
 
 
 def recent_page(request, ):
@@ -173,4 +173,3 @@ def recent_page(request, ):
 
     context = {'RoomMessages': messages}
     return render(request, 'base/recent.html', context)
-
