@@ -140,7 +140,7 @@
 
 
 
-        <div class="container-lg " id='flash-message' style="z-index : 2; ">
+        <div class="container-lg flash-message" id='flash-message' style="z-index : 2; ">
             <div class="card px-3">
                 <h2>Error Fatal</h2>
                 <i class="fas fa-check"></i>
@@ -182,17 +182,17 @@
 
     <script>
 
-    let message = document.getElementById('flash-message');
-    // console.log(message);
 
-    let button=message.getElementsByClassName('btn-custom')[0];
-    // console.log(button)
+    let message = document.getElementsByClassName('flash-message');
+
+    for (let i = 0; i < message.length; i++) {
+      let btn = message[i].getElementsByClassName("btn-custom")[0]; // Get the first button inside the current message
+      btn.addEventListener("click", function () {
+        message[i].style.display = "none"; // Hide the current message
+      });
+    }
 
 
-    button.addEventListener("click", function(){
-      	message.style.display = "none" ;
-      console.log("Display message set to hidden!!")
-    })
     </script>
 </body>
 
