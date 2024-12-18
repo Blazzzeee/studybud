@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+{% if page == 'login' %}
+
+<div class='container text-center mx-5 my-5'>
+    <form action="" method="post">
+
+    {% csrf_token %}
+        <label >Username: </label>
+        <input type="text" name="username" placeholder="Enter Username ">
+
+
+        <label >Password: </label>
+        <input type="password" name="password" placeholder="Enter Password ">
+
+        <input type="submit" value="Login ">
+        <a href="{% url 'register' %}"> Havent Registered yet </a>  
+    </form>
+</div>
+{% else %}
+
+<div class='container text-center mx-5 my-5'>
+    <form action="" method="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+        <input type="submit" value="Login ">
+
+
+    </form>
+</div>
+{% endif  %}
+
+
+{% endblock content %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect,Http404
 from .models import Room, Message
-from .forms import RoomForm, MessageForm,LoginForm 
+from .forms import RoomForm, MessageForm,LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -97,30 +97,30 @@ def delete_room(request, id):
 #User session management (logout, register, login)
 
 
-def loginView(request):
+# def loginView(request):
 
-    page = 'login'
+#     page = 'login'
 
-    if request.method == 'POST':
-        username = request.POST.get('username').lower()
-        password = request.POST.get('password')
+#     if request.method == 'POST':
+#         username = request.POST.get('username').lower()
+#         password = request.POST.get('password')
 
-        try:
-            user = User.objects.get(username=username)
+#         try:
+#             user = User.objects.get(username=username)
 
-        except:
-            messages.error(request, "User does not exist")
+#         except:
+#             messages.error(request, "User does not exist")
 
-        user = authenticate(request, username=username, password=password)
+#         user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'The username and password combination is incorrect')
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, 'The username and password combination is incorrect')
 
 
-    return render(request, 'base/login_register.html', { 'page': page })
+#     return render(request, 'base/login_register.html', { 'page': page })
 
 
 def logoutUser(request):
@@ -175,10 +175,10 @@ def recent_page(request, ):
     return render(request, 'base/recent.html', context)
 
 
-#Testing area 
+#Testing area
 
 
-def loginTest(request):
+def loginView(request):
     form = LoginForm()
     context = {'form': form}
     if request.method == 'POST':
@@ -204,4 +204,4 @@ def loginTest(request):
         else:
             messages.error(request, 'Invalid Form')
             print(form.errors)
-    return render(request, 'base/temp.html', context)
+    return render(request, 'base/login_register.html', context)
