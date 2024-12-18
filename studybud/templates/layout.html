@@ -11,6 +11,8 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   <style>
   #flash-messages {
+      /* position: fixed; */
+      z-index: 2;
       background-color: #0d0d1a;
       color: #ffffff;
       justify-content: center;
@@ -30,7 +32,7 @@
       box-shadow: 0 0 15px rgba(103, 133, 255, 0.5);
   }
 
-  #flash-messages .card h2 {
+  #flash-messages .card h6 {
       font-size: 1.2em;
       margin-bottom: 15px;
       color: #ffffff;
@@ -38,7 +40,7 @@
   }
 
   #flash-messages .card i {
-      font-size: 2.5em;
+      font-size: 0.8rem;
       margin-bottom: 15px;
       color: #ffffff;
       text-shadow: 0 0 10px rgba(103, 133, 255, 0.5);
@@ -77,9 +79,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="{% static 'temp.css' %}" />
 <link rel="stylesheet" href="{% static 'styles-room.css' %}" />
-
+<link rel="stylesheet" href="{% static 'temp.css' %}" />
 {% block style %}
 
 {% endblock style %}
@@ -134,15 +136,15 @@
     </section>
 
 {% if messages %}
-<ul class="messages">
+<ul class="messages3" style="z-index: 2; position: fixed; margin-left: 25%;">
     {% for message in messages %}
-    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+    <div{% if message.tags %} class="{{ message.tags }} my-3"{% endif %} >
 
 
 
-        <div class="container-lg flash-message" id='flash-message' style="z-index : 2; ">
+        <div class="container-lg flash-message" id='flash-message' >
             <div class="card px-3">
-                <h2>Error Fatal</h2>
+                <h6>Error Fatal</h6>
                 <i class="fas fa-check"></i>
                 <p>
                    {{ message }}
@@ -186,9 +188,9 @@
     let message = document.getElementsByClassName('flash-message');
 
     for (let i = 0; i < message.length; i++) {
-      let btn = message[i].getElementsByClassName("btn-custom")[0]; // Get the first button inside the current message
+      let btn = message[i].getElementsByClassName("btn-custom")[0];
       btn.addEventListener("click", function () {
-        message[i].style.display = "none"; // Hide the current message
+        message[i].style.display = "none";
       });
     }
 

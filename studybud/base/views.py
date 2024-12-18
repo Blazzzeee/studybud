@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect,Http404
 from .models import Room, Message
-from .forms import RoomForm, MessageForm
+from .forms import RoomForm, MessageForm,LoginForm 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -173,3 +173,35 @@ def recent_page(request, ):
 
     context = {'RoomMessages': messages}
     return render(request, 'base/recent.html', context)
+
+
+#Testing area 
+
+
+def loginTest(request):
+    form = LoginForm()
+    context = {'form': form}
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username').lower()
+            password = request.POST.get('password')
+
+            try:
+                user = User.objects.get(username=username)
+
+            except:
+                messages.error(request, "User does not exist")
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Log in sucessfull")
+                return redirect('home')
+            else:
+                messages.error(request, 'The username and password combination is incorrect')
+        else:
+            messages.error(request, 'Invalid Form')
+            print(form.errors)
+    return render(request, 'base/temp.html', context)
