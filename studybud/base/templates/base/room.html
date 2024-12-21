@@ -21,7 +21,10 @@
 <div class="room-list">
     {% for roomCur in rooms %} {% if roomCur == room %}
 
-    <div class="card mb-4 mx-4 my-4 active-room" style="width: 14rem">
+    <div
+        class="card mb-4 mx-4 my-4 active-room gradient-background"
+        style="width: 14rem"
+    >
         <div class="card-body">
             <h5 class="card-title">
                 <svg
@@ -39,6 +42,7 @@
                 </svg>
                 <a href="{% url 'room' roomCur.id %}">{{roomCur.name}}</a>
 
+                {% if roomCur.host == request.user %}
                 <a href="{% url 'update_room' roomCur.id %}"
                     ><svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +60,7 @@
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
                         /></svg
                 ></a>
-
+                {% endif %} {% if roomCur.host == request.user %}
                 <a href="{% url 'delete_room' roomCur.id %}"
                     ><svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +74,8 @@
                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
                         /></svg
                 ></a>
+
+                {% endif %}
             </h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">
                 Topic-{{roomCur.topic}} <br />Host-@{{roomCur.host}}
@@ -97,6 +103,7 @@
                 </svg>
                 <a href="{% url 'room' roomCur.id %}">{{roomCur.name}}</a>
 
+                {% if roomCur.host == request.user %}
                 <a href="{% url 'update_room' roomCur.id %}"
                     ><svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +121,7 @@
                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
                         /></svg
                 ></a>
-
+                {% endif %} {% if roomCur.host == request.user %}
                 <a href="{% url 'delete_room' roomCur.id %}"
                     ><svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -128,6 +135,7 @@
                             d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
                         /></svg
                 ></a>
+                {% endif %}
             </h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">
                 Topic-{{roomCur.topic}} <br />Host-@{{roomCur.host}}

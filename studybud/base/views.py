@@ -46,20 +46,27 @@ def room(request, id):
 
 @login_required(login_url='login')
 def create_room(request):
-    context = None
+    
+    form = RoomForm()
+    context = {'form': form}
+
 
     if request.method =='POST':
         form = RoomForm(request.POST)
         # print(request.POST)
+         
         if form.is_valid():
+            room = form.save(commit=False)
+            room.host = request.user
             form.save()
+            messages.success(request, "Room created sucessfullyy")
             return redirect('home')
         else:
-            return Http404('ERROR SUBMITTING FORM , FORM INVALID!!!')
+            print(form.errors)
+            messages.error(request, "Could not create room \n Try again!")
+            return redirect('home')
 
     else:
-        form = RoomForm()
-        context = {'form': form}
         return render(request, 'base/room_form.html', context)
 
 @login_required(login_url='login')
@@ -97,30 +104,6 @@ def delete_room(request, id):
 #User session management (logout, register, login)
 
 
-# def loginView(request):
-
-#     page = 'login'
-
-#     if request.method == 'POST':
-#         username = request.POST.get('username').lower()
-#         password = request.POST.get('password')
-
-#         try:
-#             user = User.objects.get(username=username)
-
-#         except:
-#             messages.error(request, "User does not exist")
-
-#         user = authenticate(request, username=username, password=password)
-
-#         if user is not None:
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             messages.error(request, 'The username and password combination is incorrect')
-
-
-#     return render(request, 'base/login_register.html', { 'page': page })
 
 
 def logoutUser(request):
@@ -145,7 +128,7 @@ def registerPage(request):
         if form.is_valid():
 
             user = form.save(commit=False)
-            user.usrname = user.username.lower()
+            user.username = user.username.lower()
             user.save() 
             login(request, user)
 
@@ -181,9 +164,6 @@ def recent_page(request, ):
 
     context = {'RoomMessages': messages}
     return render(request, 'base/recent.html', context)
-
-
-#Testing area
 
 
 def loginView(request):

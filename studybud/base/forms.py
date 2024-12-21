@@ -8,7 +8,12 @@ from django.contrib.auth.forms import UserCreationForm
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = '__all__'
+        exclude = ['host']
+        widgets = {
+                'description':forms.Textarea(attrs={'cols': 18, 'rows': 5}),
+                }
+
+
 
 class MessageForm(ModelForm):
     class Meta:
