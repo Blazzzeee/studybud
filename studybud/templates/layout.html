@@ -13,16 +13,17 @@
   #flash-messages {
       /* position: fixed; */
       z-index: 2;
-      background-color: #0d0d1a;
+      background-color: transparent;
       color: #ffffff;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      flex-grow: 0;
   }
 
   #flash-messages .card {
-      background-color: transparent;
+      background-color: #0d0d1a
       border: 2px solid #6785ff;
       border-radius: 10px;
       padding: 20px;
@@ -73,6 +74,10 @@
           width: 100%;
       }
   }
+
+
+
+
       </style>
   <link rel="stylesheet" href="{% static 'styles.css' %}" />
 
@@ -104,7 +109,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><svg xmlns="http://www.w3.org/2000/svg"
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="margin-left: -10px;"><svg xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" class="bi bi-house-door-fill fs-4" viewBox="0 0 16 16"
                     style="width: 1em; height: 1em">
                     <path
@@ -112,7 +117,7 @@
                   </svg></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active my-4" aria-current="page" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                <a class="nav-link active my-4" aria-current="page" href="#" style="margin-left: -10px;"><svg xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" class="bi bi-chat-left-text-fill fs-4"
                     viewBox="0 0 16 16" style="width: 1em; height: 1em">
                     <path
@@ -121,7 +126,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'login' %}"><svg xmlns="http://www.w3.org/2000/svg"
+                <a class="nav-link active" aria-current="page" href="{% url 'login' %}" style="margin-left: -15px; margin-bottom: 10px;"><svg xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" class="bi bi-person-circle fs-2" viewBox="0 0 16 16"
                     style="width: 1em; height: 1em">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -131,13 +136,41 @@
               </li>
 
               <li class="nav-item">
-                             <a class="nav-link active my-3 " aria-current="page" href="{% url 'recent' %}">  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16" style="width: 2em; height: 2em;">
+                             <a class="nav-link active my-3 " aria-current="page" href="{% url 'recent' %}" style="margin-left: -15px;">  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16" style="width: 2em; height: 2em;">
                                                             <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
                                                             <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
                                                             <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
                                                           </svg> </a>
 
                            </li>
+
+            {%if request.user.is_authenticated %}
+<!-- <a href="logout"> Logout </a> -->
+                <li class="nav-item">
+                     <a class="nav-link active my-1 " aria-current="page" href="{% url 'logout' %}" style="margin-left: -10px;">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16" style="width: 2em; height: 2em;">
+                           <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                           <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                         </svg>
+                     </a>
+                </li>
+
+            {% else %}
+
+            <!-- <li class="nav-item">
+                                 <a class="nav-link active my-3 " aria-current="page" href="{% url 'login' %}">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                       <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                       <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                     </svg>
+                                 </a>
+                            </li>  -->
+
+
+            {% endif %}
+
+
+
             </ul>
           </div>
         </nav>
@@ -145,15 +178,15 @@
     </section>
 
 {% if messages %}
-<ul class="messages3" style="z-index: 2; position: fixed; margin-left: 25%;">
+<ul class="messages3" style="z-index: 2; position: fixed; margin-left: 25% ;">
     {% for message in messages %}
-    <div{% if message.tags %} class="{{ message.tags }} my-3"{% endif %} >
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %} >
 
 
 
-        <div class="container-lg flash-message" id='flash-message' >
-            <div class="card px-3">
-                <h6>Error Fatal</h6>
+        <div class="container-lg flash-message" id='flash-messages' >
+            <div class="card">
+                <!-- <h6>Error Fatal</h6> -->
                 <i class="fas fa-check"></i>
                 <p>
                    {{ message }}
@@ -167,14 +200,7 @@
 {% endif %}
 
 
-{% if request.user.is_authenticated %}
-<a href="logout"> Logout </a>
 
-{% else %}
-
-
-
-{% endif %}
 
 
 
