@@ -1,12 +1,10 @@
-from django.shortcuts import render,get_object_or_404,redirect,Http404
-from .models import Room, Message
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import Room, Message, User
 from .forms import RoomForm, MessageForm,LoginForm,RegisterForm 
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 rooms = Room.objects.all()
@@ -120,18 +118,19 @@ def logoutUser(request):
 
 def registerPage(request):
     form = RegisterForm()
-
+    print(form.errors)
     context = {'form': form}
     if request.method == 'POST':
         form = RegisterForm(request.POST)
+        
         #print(f'LOG: POST data recieved!!: {request.POST}')
         if form.is_valid():
 
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            user.email = user.email.lower()
             user.save() 
             login(request, user)
-
+            messages.success(request, "Registered sucessfully")
             return redirect('home')
 
         else:
@@ -173,16 +172,16 @@ def loginView(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST.get('username').lower()
+            email = request.POST.get('email').lower()
             password = request.POST.get('password')
 
             try:
-                user = User.objects.get(username=username)
+                user = User.objects.get(email=email)
 
             except:
                 messages.error(request, "User does not exist")
 
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(request, email=email, password=password)
 
             if user is not None:
                 login(request, user)
