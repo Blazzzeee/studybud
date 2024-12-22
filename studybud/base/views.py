@@ -193,3 +193,8 @@ def loginView(request):
             messages.error(request, 'Invalid Form')
             print(form.errors)
     return render(request, 'base/login_register.html', context)
+
+
+def testView(request):
+
+    return render(request, 'base/test.html')

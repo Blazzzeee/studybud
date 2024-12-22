@@ -1,5 +1,4 @@
-{% extends 'layout.html' %} {% block content %}
-
+{% extends 'layout.html' %} {% block content %} {% load static %}
 <div class="searchbar mx-4 mt-3 mb-5">
     <label for="search" class="icon-label">
         <svg
@@ -78,7 +77,7 @@
                 {% endif %}
             </h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">
-                Topic-{{roomCur.topic}} <br />Host-@{{roomCur.host}}
+                Topic-{{roomCur.topic}} <br />Host-@{{roomCur.host.username}}
             </h6>
         </div>
     </div>
@@ -138,7 +137,7 @@
                 {% endif %}
             </h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">
-                Topic-{{roomCur.topic}} <br />Host-@{{roomCur.host}}
+                Topic-{{roomCur.topic}} <br />Host-@{{roomCur.host.username}}
             </h6>
         </div>
     </div>
@@ -157,12 +156,48 @@
             </div>
         </div>
     </form>
+
     <div class="message-container">
         {% for message in RoomMessages %} {% if message.user == request.user %}
-        <div class="message-self mx-4 rounded px-5 py-2">{{message}}</div>
-
+        <div
+            class="message-self mx-4 rounded px-5 py-2 d-flex justify-content-between align-items-center"
+        >
+            <div class="message-text">
+                <span class="username">
+                    <img
+                        src="{{ message.user.avatar.url }}"
+                        alt="Avatar"
+                        style="width: 30px; height: 30px; margin-right: 20px"
+                    />
+                    {{ message.user.name }} <br />
+                    ----------
+                </span>
+                <br />
+                {{ message }}
+            </div>
+        </div>
         {% else %}
-        <div class="message-others mx-4 rounded px-5 py-2">{{message}}</div>
+        <div
+            class="message-others mx-4 rounded px-4 py-2 d-flex justify-content-start align-items-center"
+        >
+            <img
+                src="{{ message.user.avatar.url }}"
+                alt="Avatar"
+                style="
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 20px;
+                    background: transparent !important;
+                    margin-left: 0px;
+                "
+            />
+            <div class="message-text">
+                <span class="username">{{ message.user.name }}</span>
+                <br />
+                -------- <br />
+                {{ message }}
+            </div>
+        </div>
         {% endif %} {% endfor %}
     </div>
 </div>
