@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     name = models.CharField(max_length=200, null=True)
     bio = models.TextField(blank=True, null=True)
-    avatar = models.ImageField(default='default.png')
+    avatar = models.ImageField(default='default.png', upload_to='avatars/')
     email = models.EmailField(max_length=100, unique=True)
 
     USERNAME_FIELD = 'email'
@@ -44,8 +44,7 @@ class Message(Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-created', ]
+    
 
 
     def __str__(self):

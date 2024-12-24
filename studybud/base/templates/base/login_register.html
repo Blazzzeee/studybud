@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-
+{% load static %}
     {% block content %}
 {% if page == "login" %}
 <div class="session mx-5 my-5">
@@ -90,54 +90,25 @@
             </div>
         </div>
 
-        <!-- <div class="floating-label">
-                   {{ form.password2 }}
-                   <label for="password">password:</label>
-                   <div class="icon">
-                       <?xml version="1.0" encoding="utf-8"?>
-                       <svg
-                           enable-background="new 0 0 24 24"
-                           version="1.1"
-                           viewbox="0 0 24 24"
-                           xml:space="preserve"
-                           xmlns="http://www.w3.org/2000/svg"
-                       >
-                           <style type="text/css">
-                               .st0 {
-                                   fill: none;
-                               }
-                               .st1 {
-                                   fill: #010101;
-                               }
-                           </style>
-                           <rect class="st0" width="24" height="24" />
-                           <path class="st1" d="m19,21h5v9h14v21z m6,20h12v10h6v20z" />
-                           <path
-                               class="st1"
-                               d="m16.5,10h-1v7c0-1.9-1.6-3.5-3.6-3.5s8.5,5.1,8.5,7v3h-1v7c0-2.5,2-4.5,4.5-4.5s4.5,2,4.5,4.5v10z"
-                           />
-                           <path
-                               class="st1"
-                               d="m12 16.5c-0.8 0-1.5-0.7-1.5-1.5s0.7-1.5 1.5-1.5 1.5 0.7 1.5 1.5-0.7 1.5-1.5 1.5zm0-2c-0.3 0-0.5 0.2-0.5 0.5s0.2 0.5 0.5 0.5 0.5-0.2 0.5-0.5-0.2-0.5-0.5-0.5z"
-                           />
-                       </svg>
-                   </div>
-        </div> -->
 
-        <input type="submit" value="log in" class="btn btn-dark" />
+        <input type="submit" value="Log in" class="btn btn-dark" />
         <a
             href="https://codepen.io/elujambio/pen/yjwzgp"
             class="discrete"
             target="_blank"
             >basic version</a
         >
+        <label for="password"> Haven't Registered Yet??? </label>
+        <a href="{% url 'register' %}" class="btn btn-dark register"  >
+                  Register
+                </a>
     </form>
 </div>
 
 {% else %}
 
 <div class="session mx-5 my-5">
-    <div class="left">
+    <div class="left" >
         <?xml version="1.0" encoding="UTF-8"?>
         <svg
             enable-background="new 0 0 300 302.5"
@@ -150,6 +121,9 @@
                 .st01 {
                     fill: #fff;
                 }
+                .left{
+                    background-image:url({% static 'register.jpg' %});
+                }
             </style>
             <path
                 class="st01"
@@ -157,12 +131,43 @@
             />
         </svg>
     </div>
-    <form action="" class="log-in" autocomplete="off" method="post">
+    <form action="" class="log-in" autocomplete="off" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         <h4>Studybud Login</span></h4>
 
-        <p>welcome back! log in to your account to chat!!</p>
+        <p>Register for Studybud today!!</p>
+
+        <div class="floating-label">
+                    {{ form.name }}
+                    <label for="email">username:</label>
+
+                    <div class="icon">
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <svg
+                            enable-background="new 0 0 100 100"
+                            version="1.1"
+                            viewbox="0 0 100 100"
+                            xml:space="preserve"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <style type="text/css">
+                                .st0 {
+                                    fill: none;
+                                }
+                            </style>
+                            <g transform="translate(0 -952.36)">
+                                <path
+                                    d="m17.5 977c-1.3 0-2.4 1.1-2.4 2.4v45.9c0 1.3 1.1 2.4 2.4 2.4h64.9c1.3 0 2.4-1.1 2.4-2.4v-45.9c0-1.3-1.1-2.4-2.4-2.4h-64.9zm2.4 4.8h60.2v1.2l-30.1 22-30.1-22v-1.2zm0 7l28.7 21c0.8 0.6 2 0.6 2.8 0l28.7-21v34.1h-60.2v-34.1z"
+                                />
+                            </g>
+                            <rect class="st0" width="100" height="100" />
+                        </svg>
+
+                    </div>
+                </div>
+
+
 
         <div class="floating-label">
             {{ form.email }}
@@ -274,6 +279,36 @@
                    </div>
                </div>
 
+               <div class="floating-label">
+                           {{ form.avatar }}
+                           <label for="email">Avatar:</label>
+
+                           <div class="icon">
+                               <?xml version="1.0" encoding="utf-8"?>
+                               <svg
+                                   enable-background="new 0 0 100 100"
+                                   version="1.1"
+                                   viewbox="0 0 100 100"
+                                   xml:space="preserve"
+                                   xmlns="http://www.w3.org/2000/svg"
+                               >
+                                   <style type="text/css">
+                                       .st0 {
+                                           fill: none;
+                                       }
+                                   </style>
+                                   <g transform="translate(0 -952.36)">
+                                       <path
+                                           d="m17.5 977c-1.3 0-2.4 1.1-2.4 2.4v45.9c0 1.3 1.1 2.4 2.4 2.4h64.9c1.3 0 2.4-1.1 2.4-2.4v-45.9c0-1.3-1.1-2.4-2.4-2.4h-64.9zm2.4 4.8h60.2v1.2l-30.1 22-30.1-22v-1.2zm0 7l28.7 21c0.8 0.6 2 0.6 2.8 0l28.7-21v34.1h-60.2v-34.1z"
+                                       />
+                                   </g>
+                                   <rect class="st0" width="100" height="100" />
+                               </svg>
+
+                           </div>
+                       </div>
+
+
         <input type="submit" value="log in" class="btn btn-dark" />
         <a
             href="https://codepen.io/elujambio/pen/yjwzgp"
@@ -281,6 +316,8 @@
             target="_blank"
             >basic version</a
         >
+
+
     </form>
 
 

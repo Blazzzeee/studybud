@@ -1,4 +1,10 @@
-{% extends 'layout.html' %} {% block content %} {% load static %}
-<img src="{% static 'pxfuel.jpg' %}" alt="" />
+{% extends 'layout.html' %} {% block content %}
 
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %} 
+
+    {{ form.as_p }}
+
+    <input type="submit" value="log in" class="btn btn-dark" />
+</form>
 {% endblock content %}

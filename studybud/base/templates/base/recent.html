@@ -1,7 +1,9 @@
-{% extends 'layout.html' %} {% block style %}
+{% extends 'layout.html' %}
+{% load static %}
+{% block style %}
 <style>
-    d body {
-        background-color: #2a2a3e;
+    body {
+        background-color: #212529; /* Set background to #212529 */
         color: #ffffff;
         font-family: "Arial", sans-serif;
         display: flex;
@@ -11,14 +13,14 @@
         margin: 0;
     }
     .recent-activities {
-        background-color: #3a3a5e;
+        background-color: #212529; /* Set background to #212529 */
         border-radius: 8px;
         padding: 15px;
         width: 400px;
     }
     .activity-card {
-        background-color: #3a3a5e;
-        border: 1px solid #6785ff;
+        background-color: #212529; /* Set background to #212529 */
+        border: 1px solid #4e7eff; /* Set border to a stronger blue */
         border-radius: 8px;
         padding: 15px;
         margin-bottom: 15px;
@@ -30,43 +32,50 @@
         margin-right: 10px;
     }
     .activity-card .username {
-        color: #6785ff;
+        color: #4e7eff; /* Set username color to a brighter blue */
     }
     .activity-card .post-title {
-        color: #ffffff;
+        color: #4e7eff; /* Set post title color to a brighter blue */
     }
     .activity-card .comment {
-        background-color: #4a4a6e;
+        background-color: #212529; /* Set comment background to #212529 */
         border-radius: 8px;
         padding: 10px;
         margin-top: 10px;
+        color: #ffffff; /* Set comment text color to white */
+    }
+    h5 {
+        color: #4e7eff; /* Set heading color to a brighter blue */
+    }
+    /* Adding hover effect for a more interactive experience */
+    .activity-card:hover {
+        border-color: #6785ff; /* Change border color on hover */
+        background-color: #2a2e36; /* Darker background on hover */
     }
 </style>
+{% endblock style %}
 
-{% endblock style %} {% block content %}
-
-<!-- {% for message in RoomMessages %}
-<div class="message-others mx-4 rounded px-5 py-2">{{ message }}</div>
-{% endfor %} -->
+{% block content %}
 
 <div class="container">
+<h5>RECENT ACTIVITIES</h5>
     {% for message in RoomMessages %}
     <div class="recent-activities">
-        <h5 style="color: #6785ff">RECENT ACTIVITIES</h5>
+        
         <div class="activity-card">
             <div class="d-flex align-items-center">
                 <img
                     alt="Profile picture of @garysimon"
                     height="40"
-                    src="https://storage.googleapis.com/a1aa/image/VDUfGTcme0l7KkLJuF0x9bzeNMFL18uKyfQeBcPKUbvfElCfJA.jpg"
+                    src="{{ message.user.avatar.url }}"
                     width="40"
                 />
                 <div>
-                    <div class="username">@{{message.user}}</div>
-                    <div class="text-muted">{{message.created}}</div>
+                    <div class="username">@{{ message.user }}</div>
+                    <div class="text-muted">{{ message.created }}</div>
                     <div class="post-title">
                         replied to post “
-                        <span class="text-info"> {{message.room}} </span>
+                        <span class="text-info">{{ message.room }}</span>
                         ”
                     </div>
                 </div>
@@ -76,4 +85,5 @@
     </div>
     {% endfor %}
 </div>
+
 {% endblock content %}

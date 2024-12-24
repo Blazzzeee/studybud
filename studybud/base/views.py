@@ -121,11 +121,11 @@ def registerPage(request):
     print(form.errors)
     context = {'form': form}
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
         
         #print(f'LOG: POST data recieved!!: {request.POST}')
         if form.is_valid():
-
+            print(f"POST: {request.POST} FILES: {request.FILES}")
             user = form.save(commit=False)
             user.email = user.email.lower()
             user.save() 
@@ -144,7 +144,7 @@ def registerPage(request):
 
 # Messages Crud operaton
 
-def delete_message(request, id):
+def delete_message(request):
 
     context = {}
 
@@ -195,6 +195,15 @@ def loginView(request):
     return render(request, 'base/login_register.html', context)
 
 
-def testView(request):
 
-    return render(request, 'base/test.html')
+def testView(request):
+    form = RegisterForm()
+
+    
+    if request.method == 'POST':
+        form = RegisterForm(request.POST, request.FILES)        
+        print(f'FILES: {request.FILES}, POST: {request.POST}')
+
+    context = {'form': form}      
+    return render(request, 'base/test.html', context)
+

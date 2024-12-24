@@ -159,23 +159,29 @@
 
     <div class="message-container">
         {% for message in RoomMessages %} {% if message.user == request.user %}
+
         <div
             class="message-self mx-4 rounded px-5 py-2 d-flex justify-content-between align-items-center"
         >
+            <img
+                src="{{ message.user.avatar.url }}"
+                alt="Avatar"
+                style="
+                    width: 60px;
+                    height: 60px;
+                    margin-right: 20px;
+                    background: transparent !important;
+                    margin-left: 0px;
+                "
+            />
             <div class="message-text">
-                <span class="username">
-                    <img
-                        src="{{ message.user.avatar.url }}"
-                        alt="Avatar"
-                        style="width: 30px; height: 30px; margin-right: 20px"
-                    />
-                    {{ message.user.name }} <br />
-                    ----------
-                </span>
+                <span class="username">{{ message.user.name }}</span>
                 <br />
+                -------- <br />
                 {{ message }}
             </div>
         </div>
+
         {% else %}
         <div
             class="message-others mx-4 rounded px-4 py-2 d-flex justify-content-start align-items-center"
@@ -184,8 +190,8 @@
                 src="{{ message.user.avatar.url }}"
                 alt="Avatar"
                 style="
-                    width: 40px;
-                    height: 40px;
+                    width: 60px;
+                    height: 60px;
                     margin-right: 20px;
                     background: transparent !important;
                     margin-left: 0px;
