@@ -1,6 +1,8 @@
+# studybud
+
+
 ![1000061925](https://github.com/user-attachments/assets/7af2bb2a-6338-45cd-9daf-89d441e449a8)
 ![1000061924](https://github.com/user-attachments/assets/9820e9df-8588-4cae-a6c5-1f1b8d65f807)
-# studybud
 ![1000061934](https://github.com/user-attachments/assets/be8022cf-0cec-4745-9868-8325454a8157)
 
 
